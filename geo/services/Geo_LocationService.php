@@ -39,7 +39,7 @@ class Geo_LocationService extends BaseApplicationComponent
 	public function getIsEu()
 	{
 		$isEu = false;
-		$isEuUserCookie = 'flow_eu_user';
+		$isEuUserCookie = 'craft_geo_eu_user';
 
 		if(!isset($_COOKIE[$isEuUserCookie])) {
 			$response = $this->fetchIpData();

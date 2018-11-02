@@ -5,7 +5,7 @@ class GeoPlugin extends BasePlugin
 {
     public function getName()
     {
-         return Craft::t('IP Stack');
+         return Craft::t('Geo');
     }
 
     public function getDescription()
