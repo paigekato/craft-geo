@@ -3,10 +3,13 @@ namespace Craft;
 
 class GeoVariable
 {
-
-    public function info($cache=true)
+    public function data($cache=true)
     {
-        return craft()->geo_location->getInfo($cache);
+        return craft()->geo_location->getIpData($cache);
     }
 
+    public function isEu($cache=true)
+    {
+        return craft()->geo_location->getIsEu();
+    }
 }

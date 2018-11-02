@@ -5,7 +5,12 @@ class GeoPlugin extends BasePlugin
 {
     public function getName()
     {
-         return Craft::t('Geo');
+         return Craft::t('IP Stack');
+    }
+
+    public function getDescription()
+    {
+         return 'A tweaked version of geo cache by Luke Holder, to use a new IP API, IP Stack:https://ipstack.com';
     }
 
     public function getVersion()
@@ -15,11 +20,11 @@ class GeoPlugin extends BasePlugin
 
     public function getDeveloper()
     {
-        return 'Luke Holder';
+        return 'Paige Kato';
     }
 
     public function getDeveloperUrl()
     {
-        return 'http://lukeholder.com';
+        return 'https://github.com/paigekato/craft-geo';
     }
 }
