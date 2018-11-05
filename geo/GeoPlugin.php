@@ -10,7 +10,7 @@ class GeoPlugin extends BasePlugin
 
     public function getDescription()
     {
-         return 'A tweaked version of geo cache by Luke Holder, to use a new IP API, IP Stack:https://ipstack.com';
+         return 'A tweaked version of geo plugin by Luke Holder to use a new IP API, IP Stack: https://ipstack.com';
     }
 
     public function getVersion()

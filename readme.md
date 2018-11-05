@@ -1,6 +1,6 @@
 # Geo Plugin for Craft CMS 🌐
 
-A simple plugin to get information about your users location. Forked from [Luke Holder's Geo Plugin](https://github.com/lukeholder/craft-geo) for Craft 2. This plugin utilizes [IP Stack's API](https://ipstack.com/) and a key is required.
+A simple plugin to get information about your users location. Forked from [Luke Holder's Geo Plugin](https://github.com/lukeholder/craft-geo) for Craft 2. This plugin utilizes [IP Stack's API](https://ipstack.com/). A key is required.
 
 ### Getting Started:
 
