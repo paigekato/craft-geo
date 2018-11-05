@@ -32,7 +32,6 @@ class Geo_LocationService extends BaseApplicationComponent
 		$ip = craft()->request->getIpAddress();
 		$isEuUserCookie = 'craft_geo_eu_user';
 		$data = array(
-			'ip'=>'',
 			'country_code'=>'',
 			'is_eu'=>''
 		);
@@ -55,7 +54,6 @@ class Geo_LocationService extends BaseApplicationComponent
 		}
 		
 		$data = array(
-			'ip'=>$data->ip,
 			'country_code'=>$data->country_code,
 			'is_eu'=>$data->location->is_eu
 		);

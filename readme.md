@@ -20,7 +20,6 @@ in the cache  #}
 
 {# You can then access the data like this: #}
 {{ data.is_eu }}
-{{ data.ip }}
 
 {# Returns boolean if the user is in the EU #}
 {{ craft.geo.isEu() }}
@@ -29,7 +28,6 @@ in the cache  #}
 Variables available in craft twig templates:
 
 ```twig
-ip: {{ craft.geo.data.ip }}
 country_code: {{ craft.geo.data.country_code }}
 is_eu: {{ craft.geo.isEu() }}
 cached: {{ craft.geo.data.cached }}
