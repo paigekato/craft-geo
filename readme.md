@@ -13,7 +13,11 @@ A simple plugin to get information about your users location. Forked from [Luke 
 {# Returns array of ip data and saves to a cookie
 so subsequent api calls are not made, but just 
 looked up in the cache #}
-{% set data = craft.geo.data(true) %}
+{% set data = craft.geo.data() %}
+
+{# You can pass in optional IP address. By default,
+craft will fetch the current IP.  #}
+{% set data = craft.geo.data('185.86.151.11') %}
 
 {# You can then access the data like this: #}
 {{ data.is_eu }}
@@ -24,6 +28,7 @@ looked up in the cache #}
 ```
 
 Variables available in craft twig templates:
+
 ```twig
 country_code: {{ craft.geo.data.country_code }}
 is_eu: {{ craft.geo.isEu() }}
