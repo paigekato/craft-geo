@@ -30,7 +30,7 @@ class Geo_LocationService extends BaseApplicationComponent
 		$devMode = craft()->config->get('devMode');
 		$ipApiKey = craft()->config->get('ipApiKey', 'geo');
 		$ip = craft()->request->getIpAddress();
-		$isEuUserCookie = 'craft_geo_eu_user';
+		$isEuUserCookie = craft()->config->get('locationDataCookie', 'geo');
 		$data = array(
 			'country_code'=>'',
 			'is_eu'=>''
