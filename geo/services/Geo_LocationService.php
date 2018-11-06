@@ -8,9 +8,7 @@ class Geo_LocationService extends BaseApplicationComponent
 	{
 		$response = $this->fetchIpData();
 
-		if(!empty($response)){
-			return $response;
-		}
+		return $response;
 	}
 
 	public function getIsEu()
@@ -49,7 +47,13 @@ class Geo_LocationService extends BaseApplicationComponent
 		$response = $client->get($url, array(), array('exceptions' => false))->send();
 		$data = json_decode($response->getBody());
 		
-		if (!$response->getStatusCode()) {
+		if (isset($data->error)) {
+			GeoPlugin::log($data->error->type.": ".$data->error->info);
+			return array();
+		}
+
+		if ($data->country_code === null) {
+			GeoPlugin::log('Invalid IP Address');
 			return array();
 		}
 		
