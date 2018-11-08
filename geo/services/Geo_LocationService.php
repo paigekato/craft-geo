@@ -4,19 +4,17 @@ namespace Craft;
 class Geo_LocationService extends BaseApplicationComponent
 {
 
-	public function getIpData()
+	public function getIpData($ip)
 	{
-		$response = $this->fetchIpData();
+		$response = $this->fetchIpData($ip);
 
-		if(!empty($response)){
-			return $response;
-		}
+		return $response;
 	}
 
-	public function getIsEu()
+	public function getIsEu($ip)
 	{
 		$isEu = false;
-		$response = $this->fetchIpData();
+		$response = $this->fetchIpData($ip);
 
 		if(!empty($response)){
 			$isEu = $response['is_eu'];
@@ -25,12 +23,12 @@ class Geo_LocationService extends BaseApplicationComponent
 		return $isEu;
 	}
 	
-	private function fetchIpData()
+	private function fetchIpData($ip)
 	{
 		$devMode = craft()->config->get('devMode');
 		$ipApiKey = craft()->config->get('ipApiKey', 'geo');
-		$ip = craft()->request->getIpAddress();
-		$isEuUserCookie = 'craft_geo_eu_user';
+		$ip = $ip ? $ip : craft()->request->getIpAddress();
+		$locationDataCookie = craft()->config->get('locationDataCookie', 'geo');
 		$data = array(
 			'country_code'=>'',
 			'is_eu'=>''
@@ -40,8 +38,8 @@ class Geo_LocationService extends BaseApplicationComponent
 			$ip = craft()->config->get('defaultIp', 'geo');
 		}
 
-		if(isset($_COOKIE[$isEuUserCookie])){
-			return json_decode($_COOKIE[$isEuUserCookie], true);
+		if(isset($_COOKIE[$locationDataCookie])){
+			return json_decode($_COOKIE[$locationDataCookie], true);
 		}
 
 		$client = new \Guzzle\Http\Client('https://api.ipstack.com/');
@@ -49,7 +47,13 @@ class Geo_LocationService extends BaseApplicationComponent
 		$response = $client->get($url, array(), array('exceptions' => false))->send();
 		$data = json_decode($response->getBody());
 		
-		if (!$response->getStatusCode()) {
+		if (isset($data->error)) {
+			GeoPlugin::log($data->error->type.": ".$data->error->info);
+			return array();
+		}
+
+		if ($data->country_code === null) {
+			GeoPlugin::log('Invalid IP Address');
 			return array();
 		}
 		
@@ -58,7 +62,7 @@ class Geo_LocationService extends BaseApplicationComponent
 			'is_eu'=>$data->location->is_eu
 		);
 		
-		setcookie($isEuUserCookie, json_encode($data));
+		setcookie($locationDataCookie, json_encode($data));
 		
 		return $data;
 	}

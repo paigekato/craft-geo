@@ -3,5 +3,5 @@
 return array(
     'defaultIp' => '185.86.151.11',
     'ipApiKey' => 'test',
-    'cacheTime' => 0 //never expire
+    'locationDataCookie' => 'craft_geo_location_data'
 );
