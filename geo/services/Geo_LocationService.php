@@ -62,7 +62,8 @@ class Geo_LocationService extends BaseApplicationComponent
 			'is_eu'=>$data->location->is_eu
 		);
 		
-		setcookie($locationDataCookie, json_encode($data));
+		// cookie to expire in 10 years and be available on entire domain
+		setcookie($locationDataCookie, json_encode($data), time() + (10 * 365 * 24 * 60 * 60), '/', craft()->config->get('cookieDomain', 'geo'), true);
 		
 		return $data;
 	}
